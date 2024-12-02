@@ -1,0 +1,11 @@
+{
+    "require": {
+        "api-platform/core": "^4.0",
+        "doctrine/orm": "^3.3",
+        "symfony/console": "^7.2",
+        "symfony/framework-bundle": "^7.2"
+    },
+    "require-dev": {
+        "symfony/maker-bundle": "^1.61"
+    }
+}
