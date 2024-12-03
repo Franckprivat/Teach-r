@@ -1,0 +1,20 @@
+// src/Service/SchemaUpdater.php
+namespace App\Service;
+
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Tools\SchemaTool;
+
+class SchemaUpdater
+{
+    public function __construct(private EntityManagerInterface $entityManager) {}
+
+    public function updateSchema(): void
+    {
+        $schemaTool = new SchemaTool($this->entityManager);
+        $metadata = $this->entityManager->getMetadataFactory()->getAllMetadata();
+
+        if (!empty($metadata)) {
+            $schemaTool->updateSchema($metadata, true);
+        }
+    }
+}

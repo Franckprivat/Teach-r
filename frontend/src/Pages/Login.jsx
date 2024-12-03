@@ -3,22 +3,22 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 
 
-const Login = () =>{
+const Login = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-        
+
 
     const connexion = async (e) => {
-        e.preventDefault();
-        
+        e.preventDefault(); 
+
         try {
-            const response = await fetch("Met  ta route ici avec /Login a la fin", {
+            const response = await fetch("http://127.0.0.1:8000/api/login", {
                 method: "POST",
                 headers: {
                     'Content-type': 'application/json',
                 },
-                body: JSON.stringify({ "email":email, "password":password }),
+                body: JSON.stringify({ "email": email, "password": password }),
             });
             if (!response.ok) {
                 console.error("That's not working ");
@@ -31,23 +31,23 @@ const Login = () =>{
         }
     };
 
-    return(
+    return (
         <div>
             <div className="login-container">
-            <div className="Wrapper-Login">
-                <h1>Connexion</h1>
-                <form onSubmit={connexion}>
-                    <label>Email :</label>
-                    <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-                    <label>Password :</label>
-                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-                    <button type="submit">Se connecter</button>
-                </form>
-                <p>
-                    Pas de compte ? Inscrivez-vous <a href="/SignUp">ici</a>
-                </p>
+                <div className="Wrapper-Login">
+                    <h1>Connexion</h1>
+                    <form onSubmit={connexion}>
+                        <label>Email :</label>
+                        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                        <label>Password :</label>
+                        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                        <button type="submit">Se connecter</button>
+                    </form>
+                    <p>
+                        Pas de compte ? Inscrivez-vous <a href="/SignUp">ici</a>
+                    </p>
+                </div>
             </div>
-        </div>
         </div>
     )
 }

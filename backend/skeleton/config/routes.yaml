@@ -4,7 +4,6 @@ auth_login:
 
     controller: App\Controller\AuthController::login
 
-
 auth_signup:
     path: /api/signup
     controller: App\Controller\AuthController::signup
@@ -12,4 +11,6 @@ auth_signup:
 home: 
     path: /
     controller: App\Controller\HomeController::index
+
+
 
