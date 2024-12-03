@@ -1,13 +1,15 @@
 # config/routes.yaml
 auth_login:
     path: /api/login
-    # the controller value has the format 'controller_class::method_name'
+
     controller: App\Controller\AuthController::login
 
-    # if the action is implemented as the __invoke() method of the
-    # controller class, you can skip the '::method_name' part:
-    # controller: App\Controller\BlogController
+
+auth_signup:
+    path: /api/signup
+    controller: App\Controller\AuthController::signup
 
 home: 
     path: /
     controller: App\Controller\HomeController::index
+

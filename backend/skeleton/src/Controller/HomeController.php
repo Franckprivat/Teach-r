@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class HomeController extends AbstractController{
 
-    #[Route("/", name: "home", methods: ['GET'] )]
+    // #[Route("/", name: "home", methods: ['GET'] )]
     function index(): Response {
 
         return new Response('Bonjour les gens');
