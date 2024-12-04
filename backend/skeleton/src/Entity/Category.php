@@ -1,9 +1,8 @@
-<?php
+<?php 
 
 namespace App\Entity;
 
 use App\Repository\CategoryRepository;
-use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -17,11 +16,15 @@ class Category
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: 'The category name cannot be blank.')]
     private ?string $name = null;
+
+    // Déclare l'attribut products
+    #[ORM\OneToMany(mappedBy: 'category', targetEntity: Product::class)]
+    private Collection $products;
 
     public function __construct()
     {
+        // Initialise la collection pour les produits
         $this->products = new ArrayCollection();
     }
 
@@ -67,3 +70,5 @@ class Category
         return $this;
     }
 }
+
+

@@ -1,16 +1,16 @@
 # config/routes.yaml
-auth_login:
-    path: /api/login
+# auth_login:
+#     path: /api/login
 
-    controller: App\Controller\AuthController::login
+#     controller: App\Controller\AuthController::login
 
-auth_signup:
-    path: /api/signup
-    controller: App\Controller\AuthController::signup
+# auth_signup:
+#     path: /api/signup
+#     controller: App\Controller\AuthController::signup
 
-# home: 
-#     path: /
-#     controller: App\Controller\HomeController::index
+home: 
+    path: /books
+    controller: App\Controller\HomeController::index
 
 
 

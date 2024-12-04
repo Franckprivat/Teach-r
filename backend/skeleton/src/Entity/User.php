@@ -40,10 +40,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->password;
     }
 
-    public function setPassword(string $password, PasswordHasherInterface $passwordHasher): static
+    public function setPassword(string $hashedPassword): static 
     {
-        $this->password = $passwordHasher->hashPassword($this, $password);
-
+        $this->password = $hashedPassword;
         return $this;
     }
 

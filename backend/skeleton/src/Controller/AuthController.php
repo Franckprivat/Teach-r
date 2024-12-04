@@ -14,20 +14,24 @@ use Doctrine\ORM\EntityManagerInterface;
 class AuthController extends AbstractController
 {
 
-
     #[Route('/api/login', name: 'auth_login', methods: ['POST'])]
     public function login(Request $request, UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $entityManager): Response
     {
 
         $data = json_decode($request->getContent(), true);
+
+        if (!isset($data['email']) || !isset($data['password'])) {
+            return $this->json(['error' => 'Champs requis']);
+        }
+
+        
         $email = $data['email'];
         $password = $data['password'];
 
-
         $user = $entityManager->getRepository(User::class)->findOneBy(['email' => $email]);
 
-        if (!$user || !$passwordHasher->isPasswordValid($user, $password)) {
-            return $this->json(['message' => 'Identifiants invalides'], Response::HTTP_UNAUTHORIZED);
+        if (!$user || !$passwordHasher || !$passwordHasher->isPasswordValid($user, $password)) {
+            return $this->json(['message' => 'Identifiants invalides']);
         }
 
 
@@ -41,17 +45,19 @@ class AuthController extends AbstractController
     {
 
         $data = json_decode($request->getContent(), true);
-        $firstName = $data['firstName'];  
-        $lastName = $data['lastName'];    
-        $email = $data['email'];
-        $password = $data['password'];
 
+        if (!isset($data['firstName'], $data['lastName'], $data['email'], $data['password'])) {
+            return new JsonResponse(['error' => 'Invalid input']);
+        }
 
         $user = new User();
-        $user->setFirstName($firstName);
-        $user->setLastName($lastName);    
-        $user->setEmail($email);
-        $user->setPassword($passwordHasher->hashPassword($user, $password));  
+        $user->setFirstName($data['firstName']);
+        $user->setLastName($data['lastName']);    
+        $user->setEmail($data['email']);
+
+        $hashedPassword = $passwordHasher->hashPassword($user, $data['password']);
+        $user->setPassword($hashedPassword);
+
 
         $entityManager->persist($user);
         $entityManager->flush();

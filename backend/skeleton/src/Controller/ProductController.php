@@ -18,24 +18,24 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 final class ProductController extends AbstractController{
 
-    #[Route( '/product',name: 'product_index', methods: ['POST'])]
+    #[Route( '/product',name: 'product_index', methods: ['GET'])]
     public function index(ProductRepository $productRepository): JsonResponse
     {
         $products = $productRepository->findAll();
         return $this->json($product);
     }
 
-    #[Route('/product/new', name: 'product_new', methods: ['POST'])]
+    #[Route('api/product/new', name: 'product_new', methods: ['POST'])]
 public function new(Request $request, EntityManagerInterface $em, CategoryRepository $categoryRepository, ValidatorInterface $validator): JsonResponse
 {
     $data = json_decode($request->getContent(), true);
     if (!isset($data['name'], $data['description'], $data['price'], $data['category_id'])) {
-        return $this->json(['error' => 'Invalid data'], Response::HTTP_BAD_REQUEST);
+        return $this->json(['error' => 'Invalid data']);
     }
 
     $category = $categoryRepository->find($data['category_id']);
     if (!$category) {
-        return $this->json(['error' => 'Category not found'], Response::HTTP_BAD_REQUEST);
+        return $this->json(['error' => 'Category not found']);
     }
 
     $product = new Product();
