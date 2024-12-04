@@ -15,8 +15,7 @@ class AuthController extends AbstractController
 {
 
 
-    #[Route("/api/login", name: "login", methods: ['POST'] )]
-
+    #[Route('/api/login', name: 'auth_login', methods: ['POST'])]
     public function login(Request $request, UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $entityManager): Response
     {
 
@@ -37,8 +36,7 @@ class AuthController extends AbstractController
 
     
 
-    #[Route("/api/signup", name: "signup", methods: ['POST'] )]
-
+    #[Route('/api/signup', name: 'auth_signup', methods: ['POST'])]
     public function signup(Request $request, UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $entityManager): Response
     {
 
@@ -58,7 +56,7 @@ class AuthController extends AbstractController
         $entityManager->persist($user);
         $entityManager->flush();
 
-        return new JsonResponse(['message' => 'Bienvenue ! Votre compte a été créé avec succès']); 
+        return new JsonResponse(['message' => 'Bienvenue !']); 
     }
 
 }

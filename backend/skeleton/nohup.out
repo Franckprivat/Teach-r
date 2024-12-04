@@ -1,0 +1,11 @@
+
+ WARNING! You are about to execute a migration in database "my_project_dev" that could result in schema changes and data loss. Are you sure you wish to continue? (yes/no) [yes]:
+ > [critical] Error thrown while running command "doctrine:migrations:migrate". Message: "Notice: fgets(): Read of 8192 bytes failed with errno=9 Bad file descriptor"
+
+In QuestionHelper.php line 506:
+                                                                               
+  Notice: fgets(): Read of 8192 bytes failed with errno=9 Bad file descriptor  
+                                                                               
+
+doctrine:migrations:migrate [--write-sql [WRITE-SQL]] [--dry-run] [--query-time] [--allow-no-migration] [--all-or-nothing [ALL-OR-NOTHING]] [--no-all-or-nothing] [--configuration CONFIGURATION] [--em EM] [--conn CONN] [--] [<version>]
+

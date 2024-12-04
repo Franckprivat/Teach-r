@@ -8,15 +8,14 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\Response;
 
 
-#[Route("/", name: "home")]
 
-class HomeController extends AbstractController{
-    
-    #[Route("/", name: "home", methods: ['POST'] )]
+
+#[Route("/", name: "home", methods: ['GET'])]
+class HomeController extends AbstractController{    
     public function index(ProductRepository $productRepository, CategoryRepository $categoryRepository): JsonResponse
     {
-        $products => $productRepository->findAll(),
-        $category => $categoryRepository->findAll()
+        $products = $productRepository->findAll();
+        $category = $categoryRepository->findAll();
         
         $data = [
             'products' => $products,

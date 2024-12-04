@@ -8,9 +8,9 @@ auth_signup:
     path: /api/signup
     controller: App\Controller\AuthController::signup
 
-home: 
-    path: /
-    controller: App\Controller\HomeController::index
+# home: 
+#     path: /
+#     controller: App\Controller\HomeController::index
 
 
 
