@@ -18,13 +18,13 @@ class Category
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    // Déclare l'attribut products
+    
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Product::class)]
     private Collection $products;
 
     public function __construct()
     {
-        // Initialise la collection pour les produits
+        
         $this->products = new ArrayCollection();
     }
 
